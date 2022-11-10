@@ -9,6 +9,8 @@ const Stack = createNativeStackNavigator();
 import AppBottomTab from './AppBottomTab';
 
 import {ListLoaiDichVuScreen} from '@app/screen/loaidichvu';
+import {MenuScreen} from '@app/screen/menu';
+
 
 const AppStack = () => {
   const navigation = useNavigation();
@@ -17,6 +19,7 @@ const AppStack = () => {
     <Stack.Navigator initialRouteName={'HomeScreen'} screenOptions={{headerShown: false}}>
       <Stack.Screen name="HomeScreen" component={AppBottomTab} />
       <Stack.Screen name="ListLoaiDichVuScreen" component={ListLoaiDichVuScreen} />
+      <Stack.Screen name="MenuScreen" component={MenuScreen} />
     </Stack.Navigator>
   );
 };

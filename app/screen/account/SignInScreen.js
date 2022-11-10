@@ -63,7 +63,7 @@ const SignInScreen = () => {
           title={'Continue with Email'}
           contentStyle={{marginTop: 32}}
           onPress={() => {
-            navigation.navigate('SignInEmailScreen');
+            navigation.navigate('MenuScreen');
           }}
         />
         <TDDividerWithTitle title={'Or continue with'} contentStyle={{marginTop: 32, paddingHorizontal: 20}} />
