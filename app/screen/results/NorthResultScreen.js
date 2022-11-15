@@ -1,12 +1,13 @@
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert, Image, FlatList, Dimensions} from 'react-native';
 import React, {useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute } from '@react-navigation/native';
 
 import {Colors, Fonts, Images} from '@app/themes';
 import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDTextInputAccount, TDTextSearch,TDHeader} from '@app/components';
 
 const NorthResultScreen = () => {
   const navigation = useNavigation();
+  const route = useRoute();
   const Ketqua = [
     {
       id: '1',
@@ -59,7 +60,7 @@ const NorthResultScreen = () => {
   return (
     <View style={{flex: 1, backgroundColor:'#CDF0CD'}}>
        <TDHeader
-        title={'Xổ Số Miền Bắc'}
+        title={route.params.date}
         leftComponentOnPress={() => {
           navigation.goBack();
         }}

@@ -44,7 +44,7 @@ const NorthScreen = () => {
     ]
     const ndiw = ({item}) => (
         <View style={styles.item}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {navigation.navigate('NorthResultScreen', {date: item.name})}}>
           <Text style={styles.name}>{item.name}</Text>
           </TouchableOpacity>
         </View>
