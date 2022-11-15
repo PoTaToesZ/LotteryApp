@@ -59,6 +59,12 @@ const NorthScreen = () => {
       />
         <FlatList data={NorthDay} renderItem={ndiw} numColumns={4} ListEmptyComponent={<Text>No Reigons Available</Text>} />
       <Text>NorthScreen</Text>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('NorthResultScreen');
+        }}>
+        <Text style={{color: Colors.primary, fontSize: 16, fontWeight: 'bold'}}>North Result Screen</Text>
+      </TouchableOpacity>
     </View>
   )
 }

@@ -7,70 +7,95 @@ import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDTextInputAccou
 
 const MenuScreen = () => {
   const navigation = useNavigation();
-  const Reigons = [
-    {
-      id: '1',
-      name: 'Bắc',
-      image: require('@app/assets/images/north.png'),
-    },
-    {
-      id: '2',
-      name: 'Trung',
-      image: require('@app/assets/images/central.png'),
-    },
-    {
-      id: '3',
-      name: 'Nam',
-      image: require('@app/assets/images/south.png'),
-    },
-    {
-      id: '4',
-      name: 'Vietllot',
-      image: require('@app/assets/images/vietllot.png'),
-    },
-    {
-      id: '5',
-      name: 'Lịch Quay',
-      image: require('@app/assets/images/calendar.jpg'),
-    },
-    {
-      id: '6',
-      name: 'Dự Báo',
-      image: require('@app/assets/images/predict.jpg'),
-    },
-  ];
-  const reigon = ({item}) => (
-    <View style={styles.item}>
-      <TouchableOpacity >
-        <View>
-          <Text>Param</Text>
-          <Image source={item.image} style={styles.reigons} />
-        </View>
-        <Text style={styles.name}>{item.name}</Text>
-      </TouchableOpacity>
-    </View>
-  );
+  const {width, height} = Dimensions.get('screen');
+
+  // const Reigons = [
+  //   {
+  //     id: '1',
+  //     name: 'Bắc',
+  //     image: require('@app/assets/images/north.png'),
+  //   },
+  //   {
+  //     id: '2',
+  //     name: 'Trung',
+  //     image: require('@app/assets/images/central.png'),
+  //   },
+  //   {
+  //     id: '3',
+  //     name: 'Nam',
+  //     image: require('@app/assets/images/south.png'),
+  //   },
+  //   {
+  //     id: '4',
+  //     name: 'Vietllot',
+  //     image: require('@app/assets/images/vietllot.png'),
+  //   },
+  //   {
+  //     id: '5',
+  //     name: 'Lịch Quay',
+  //     image: require('@app/assets/images/calendar.jpg'),
+  //   },
+  //   {
+  //     id: '6',
+  //     name: 'Dự Báo',
+  //     image: require('@app/assets/images/predict.jpg'),
+  //   },
+  // ];
+  // const reigon = ({item}) => (
+  //   <View style={styles.item}>
+  //     <TouchableOpacity >
+  //       <View>
+  //         <Text>Param</Text>
+  //         <Image source={item.image} style={styles.reigons} />
+  //       </View>
+  //       <Text style={styles.name}>{item.name}</Text>
+  //     </TouchableOpacity>
+  //   </View>
+  // );
   return (
     <View style={styles.bigContainer}>
-      <FlatList data={Reigons} renderItem={reigon} numColumns={3} ListEmptyComponent={<Text>No Reigons Available</Text>} />
-      <TouchableOpacity
-        onPress={() => {
+      {/* <FlatList data={Reigons} renderItem={reigon} numColumns={3} ListEmptyComponent={<Text>No Reigons Available</Text>} /> */}
+      <View style={styles.row}>
+        <TouchableOpacity onPress={() => {
           navigation.navigate('NorthScreen');
         }}>
-        <Text style={{color: Colors.primary, fontSize: 16, fontWeight: 'bold'}}>Move North Screen Temp</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
+          <Image source={require('@app/assets/images/north.png')} style={styles.northImg} />
+          <Text style={styles.northTxt}>Bắc</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('CentralScreen');
+        }}>
+          <Image source={require('@app/assets/images/central.png')} style={styles.centralImg} />
+          <Text style={styles.centralTxt}>Trung</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
           navigation.navigate('SouthScreen');
         }}>
-        <Text style={{color: Colors.primary, fontSize: 16, fontWeight: 'bold'}}>Move South Screen Temp</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate('NorthResultScreen');
+          <Image source={require('@app/assets/images/south.png')} style={styles.southImg} />
+          <Text style={styles.southTxt}>Nam</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.row}>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('NorthScreen');
         }}>
-        <Text style={{color: Colors.primary, fontSize: 16, fontWeight: 'bold'}}>North Result Screen</Text>
-      </TouchableOpacity>
+          <Image source={require('@app/assets/images/vietllot.png')} style={styles.northImg} />
+          <Text style={styles.northTxt}>Vietllot</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('CalendarScreen');
+        }}>
+          <Image source={require('@app/assets/images/calendar.jpg')} style={styles.centralImg} />
+          <Text style={styles.centralTxt}>Lịch</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {
+          navigation.navigate('PredictScreen');
+        }}>
+          <Image source={require('@app/assets/images/predict.jpg')} style={styles.southImg} />
+          <Text style={styles.southTxt}>Dự đoán</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -79,22 +104,36 @@ export default MenuScreen;
 const styles = StyleSheet.create({
   bigContainer: {
     backgroundColor: '#CDF0CD',
-    paddingTop: 150,
+    paddingTop: 160,
     flex: 1,
   },
-  item: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    width: Dimensions.get('window').width / 3,
-    padding: 15,
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
   },
-  reigons: {
+  northImg: {
     height: 120,
     width: 120,
   },
-  name: {
+  centralImg: {
+    height: 120,
+    width: 120,
+  },
+  southImg: {
+    height: 120,
+    width: 120,
+  },
+  northTxt: {
     textAlign: 'center',
-    fontSize: 19,
-    color: 'black',
+    paddingTop: 5,
+  },
+  centralTxt: {
+    textAlign: 'center',
+    paddingTop: 5,
+  },
+  southTxt: {
+    textAlign: 'center',
+    paddingTop: 5,
   },
 });
