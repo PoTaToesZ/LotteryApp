@@ -35,7 +35,7 @@ const AppBottomTab = () => {
         },
         tabBarStyle: {paddingHorizontal: isTablet ? 100 : 0, backgroundColor: '#FFFFFF'},
       }}
-      backBehavior={'initialRoute'}>
+      >
       <Tab.Screen
         headerMode={'none'}
         name="HomeScreen"

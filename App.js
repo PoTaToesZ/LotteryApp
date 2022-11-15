@@ -3,7 +3,7 @@ import React from 'react';
 
 import {Provider} from 'react-redux';
 import {PersistGate} from 'redux-persist/integration/react';
-import store, {persistor} from './app/redux/store';
+import store, {persistor} from './app/sagas/redux/store';
 import Navigation from './app/navigation';
 import FlashMessage from 'react-native-flash-message';
 
