@@ -11,7 +11,7 @@ import AppBottomTab from './AppBottomTab';
 import {ListLoaiDichVuScreen} from '@app/screen/loaidichvu';
 import {MenuScreen, CalendarScreen,PredictScreen,VietllotScreen} from '@app/screen/menu';
 import {NorthScreen,CentralScreen,SouthScreen} from '@app/screen/xoso';
-import {NorthResultScreen,CentralResultScreen,SouthResultScreen} from '@app/screen/results';
+import {NorthResultScreen,CentralResultScreen,SouthResultScreen,VietllotDetailScreen} from '@app/screen/results';
 
 
 const AppStack = () => {
@@ -25,6 +25,7 @@ const AppStack = () => {
       <Stack.Screen name="CalendarScreen" component={CalendarScreen} />
       <Stack.Screen name="PredictScreen" component={PredictScreen} />
       <Stack.Screen name="VietllotScreen" component={VietllotScreen} />
+      <Stack.Screen name="VietllotDetailScreen" component={VietllotDetailScreen} />
       <Stack.Screen name="NorthScreen" component={NorthScreen} />
       <Stack.Screen name="CentralScreen" component={CentralScreen} />
       <Stack.Screen name="SouthScreen" component={SouthScreen} />

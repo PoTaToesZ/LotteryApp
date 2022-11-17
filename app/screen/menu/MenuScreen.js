@@ -78,7 +78,7 @@ const MenuScreen = () => {
 
       <View style={styles.row}>
         <TouchableOpacity onPress={() => {
-          navigation.navigate('NorthScreen');
+          navigation.navigate('VietllotScreen');
         }}>
           <Image source={require('@app/assets/images/vietllot.png')} style={styles.northImg} />
           <Text style={styles.northTxt}>Vietllot</Text>

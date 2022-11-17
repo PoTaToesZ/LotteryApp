@@ -44,7 +44,7 @@ const NorthScreen = () => {
     ]
     const ndiw = ({item}) => (
         <View style={styles.item}>
-            <TouchableOpacity onPress={() => {navigation.navigate('NorthResultScreen')}}>
+            <TouchableOpacity onPress={() => {navigation.navigate('NorthResultScreen', {date: item.name})}}>
           <Text style={styles.name}>{item.name}</Text>
           </TouchableOpacity>
         </View>
@@ -55,9 +55,6 @@ const NorthScreen = () => {
         title={'Xổ Số Miền Bắc'}
         leftComponentOnPress={() => {
           navigation.goBack();
-        }}
-        rightComponentOnPress={() => {
-          navigation.navigate('NorthResultScreen');
         }}
       />
         <FlatList data={NorthDay} renderItem={ndiw} numColumns={4} ListEmptyComponent={<Text>No Reigons Available</Text>} />

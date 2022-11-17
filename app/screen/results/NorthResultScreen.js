@@ -1,73 +1,88 @@
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert, Image, FlatList, Dimensions} from 'react-native';
-import React, {useEffect} from 'react';
-import {useNavigation, useRoute } from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {Colors, Fonts, Images} from '@app/themes';
-import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDTextInputAccount, TDTextSearch,TDHeader} from '@app/components';
+import {
+  TDButtonPrimary,
+  TDButtonSecondary,
+  TDDividerWithTitle,
+  TDTextInputAccount,
+  TDTextSearch,
+  TDHeader,
+} from '@app/components';
 
 const NorthResultScreen = () => {
   const navigation = useNavigation();
-  const route = useRoute();
-  const Ketqua = [
-    {
-      id: '1',
-      place: 'ĐB',
-      number: '71610                                              ',
-    },
-    {
-      id: '2',
-      place: '1',
-      number: '89551                                              ',
-    },
-    {
-      id: '3',
-      place: '2',
-      number: '25825      57592                                   ',
-    },
-    {
-      id: '4',
-      place: '3',
-      number: '04061      27766     63457     55406     80996     71332   ',
-    },
-    {
-      id: '5',
-      place: '4',
-      number: '4220     8664      4267      0323                      ',
-    },
-    {
-      id: '6',
-      place: '5',
-      number: '1489     4707      5990      1175      9767      6607        ',
-    },
-    {
-      id: '7',
-      place: '6',
-      number: '536      385     828                                    ',
-    },
-    {
-      id: '8',
-      place: '7',
-      number: '32     64      98      25                                  ',
-    },
-  ];
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const north = ({item}) => (
-    <View style={styles.item}>
-        <Text style={styles.place}>{item.place}</Text>
-        <Text style={styles.number}>{item.number}</Text>
-    </View>
-  );
+  useEffect(() => {
+    getResult();
+    return () => {}
+  },[])
+  const getResult = () => {
+    const apiURL = "https://api.xoso.me/app/json-kq-mienbac?ngay_quay=2022-11-08&date_range=7"
+    fetch(apiURL)
+    .then((res) => res.json())
+    .then((resJson) => {
+      setData(resJson)
+    }).catch((error) => {
+      console.log('Error:', error)
+    }).finally(() => setIsLoading(false))
+  }
+
+  
+
+  const renderItem = ({item, index}) => {
+    return (
+      <View>
+        <View style={styles.item}>
+          <View style={styles.table}>
+            <Text style={styles.row}></Text>
+            <Text style={styles.row}>ĐB</Text>
+            <Text style={styles.row}>1</Text>
+            <Text style={styles.row}>2</Text>
+            <Text style={styles.row}>3</Text>
+            <Text style={styles.row}>4</Text>
+            <Text style={styles.row}>5</Text>
+            <Text style={styles.row}>6</Text>
+            <Text style={styles.row}>7</Text>
+          </View>
+          <View style={styles.table}>
+            <Text style={styles.row}>{item.lotData.MaDb}</Text>
+            <Text style={styles.row}>{item.lotData.DB}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{item.lotData.DB}</Text>
+            <Text style={styles.row}>{item.lotData.DB}</Text>
+            <Text style={styles.row}>{item.lotData.DB}</Text>
+            <Text style={styles.row}>{item.lotData.DB}</Text>
+            <Text style={styles.row}>{item.lotData.DB}</Text>
+            <Text style={styles.row}>{item.lotData.DB}</Text>
+          </View>
+        </View>
+      </View>
+    )
+  }
+
+  const route = useRoute();
   return (
-    <View style={{flex: 1, backgroundColor:'#CDF0CD'}}>
-       <TDHeader
-        title={route.params.date}
+    <View style={{flex: 1, backgroundColor: '#CDF0CD'}}>
+      <TDHeader
+        title={'Ket qua'}
         leftComponentOnPress={() => {
           navigation.goBack();
         }}
       />
-    <View style={styles.bigContainer}>
-      <FlatList data={Ketqua} renderItem={north} numColumns={1} ListEmptyComponent={<Text>No Reigons Available</Text>} />
-    </View>
+      <View style={styles.bigContainer}>
+        {/* <FlatList data={Ketqua} renderItem={north} numColumns={1} ListEmptyComponent={<Text>No Reigons Available</Text>} /> */}
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item)=>`key-${item.id}`}
+        />
+      </View>
     </View>
   );
 };
@@ -76,22 +91,16 @@ export default NorthResultScreen;
 const styles = StyleSheet.create({
   bigContainer: {
     backgroundColor: '#CDF0CD',
-    paddingTop: 50
+   
   },
-  item:{
-    flexDirection: 'row',
-    padding: 15,
+  item: {
     justifyContent: 'space-between',
-    borderWidth: 0.5, 
-    borderColor: 'cyan', 
+    borderWidth: 0.5,
+    borderColor: 'cyan',
+    flexDirection: 'row',
   },
-  number:{
-    fontSize: 14,
-    color: 'black'
+  table: {
+    flexDirection: 'column',
+    flexWrap: 'wrap',
   },
-  place:{
-    fontSize: 14,
-    color: 'black'
-  }
-})
-
+});

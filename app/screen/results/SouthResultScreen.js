@@ -1,77 +1,88 @@
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert, Image, FlatList, Dimensions} from 'react-native';
-import React, {useEffect} from 'react';
-import {useNavigation} from '@react-navigation/native';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {Colors, Fonts, Images} from '@app/themes';
-import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDTextInputAccount, TDTextSearch,TDHeader} from '@app/components';
+import {
+  TDButtonPrimary,
+  TDButtonSecondary,
+  TDDividerWithTitle,
+  TDTextInputAccount,
+  TDTextSearch,
+  TDHeader,
+} from '@app/components';
 
 const SouthResultScreen = () => {
   const navigation = useNavigation();
-  const Ketqua = [
-    {
-      id: '1',
-      place: 'ĐB',
-      number: '003081                                              ',
-    },
-    {
-      id: '2',
-      place: '1',
-      number: '49805                                               ',
-    },
-    {
-      id: '3',
-      place: '2',
-      number: '60161                                               ',
-    },
-    {
-      id: '4',
-      place: '3',
-      number: '49356    66430                                       ',
-    },
-    {
-      id: '5',
-      place: '4',
-      number: ' 22637    08305   36919   54926   52147   93432   60378',
-    },
-    {
-      id: '6',
-      place: '5',
-      number: '3776                                               ',
-    },
-    {
-      id: '7',
-      place: '6',
-      number: '1227     7470    8561                                  ',
-    },
-    {
-      id: '8',
-      place: '7',
-      number: '267                                                ',
-    },
-    {
-        id: '9',
-        place: '8',
-        number: '74                                                 ',
-      },
-  ];
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const south = ({item}) => (
-    <View style={styles.item}>
-        <Text style={styles.place}>{item.place}</Text>
-        <Text style={styles.number}>{item.number}</Text>
-    </View>
-  );
+  useEffect(() => {
+    getResult();
+    return () => {}
+  },[[]])
+  const getResult = () => {
+    const apiURL = "https://api.xoso.me/app/json-kq-miennam?name=KQXS&v=2&ngay_quay=2022-11-07"
+    fetch(apiURL)
+    .then((res) => res.json())
+    .then((resJson) => {
+      setData(resJson)
+    }).catch((error) => {
+      console.log('Error:', error)
+    }).finally(() => setIsLoading(false))
+  }
+
+  
+
+  const renderItem = ({item, index}) => {
+    return (
+      <View>
+        <View style={styles.item}>
+          <View style={styles.table}>
+            <Text style={styles.row}></Text>
+            <Text style={styles.row}>ĐB</Text>
+            <Text style={styles.row}>1</Text>
+            <Text style={styles.row}>2</Text>
+            <Text style={styles.row}>3</Text>
+            <Text style={styles.row}>4</Text>
+            <Text style={styles.row}>5</Text>
+            <Text style={styles.row}>6</Text>
+            <Text style={styles.row}>7</Text>
+          </View>
+          <View style={styles.table}>
+            <Text style={styles.row}>{item.data.provinceCode}</Text>
+            <Text style={styles.row}>{item.resultDate}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+          </View>
+        </View>
+      </View>
+    )
+  }
+
+  const route = useRoute();
   return (
-    <View style={{flex: 1, backgroundColor:'#CDF0CD'}}>
-       <TDHeader
-        title={'Xổ Số Miền Nam'}
+    <View style={{flex: 1, backgroundColor: '#CDF0CD'}}>
+      <TDHeader
+        title={'Ket qua'}
         leftComponentOnPress={() => {
           navigation.goBack();
         }}
       />
-    <View style={styles.bigContainer}>
-      <FlatList data={Ketqua} renderItem={south} numColumns={1} ListEmptyComponent={<Text>No Reigons Available</Text>} />
-    </View>
+      <View style={styles.bigContainer}>
+        {/* <FlatList data={Ketqua} renderItem={north} numColumns={1} ListEmptyComponent={<Text>No Reigons Available</Text>} /> */}
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          keyExtractor={(item)=>`key-${item.id}`}
+        />
+      </View>
     </View>
   );
 };
@@ -80,22 +91,16 @@ export default SouthResultScreen;
 const styles = StyleSheet.create({
   bigContainer: {
     backgroundColor: '#CDF0CD',
-    paddingTop: 50
+   
   },
-  item:{
-    flexDirection: 'row',
-    padding: 15,
+  item: {
     justifyContent: 'space-between',
-    borderWidth: 0.5, 
-    borderColor: 'cyan', 
+    borderWidth: 0.5,
+    borderColor: 'cyan',
+    flexDirection: 'row',
   },
-  number:{
-    fontSize: 14,
-    color: 'black'
+  table: {
+    flexDirection: 'column',
+    flexWrap: 'wrap',
   },
-  place:{
-    fontSize: 14,
-    color: 'black'
-  }
-})
-
+});

@@ -8,7 +8,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome5Pro';
 
 import {Colors, Fonts, Images} from '@app/themes';
 
-const TDHeader = ({leftComponentOnPress, title}) => {
+const TDHeader = ({leftComponentOnPress, title,rightComponentOnPress}) => {
   return (
     <Header
       statusBarProps={{barStyle: 'dark-content', backgroundColor: 'transparent', translucent: true}}
@@ -28,6 +28,22 @@ const TDHeader = ({leftComponentOnPress, title}) => {
           }}
           onPress={leftComponentOnPress}>
           <FontAwesome name={'arrow-left'} size={24} color={'#2E2E2E'} />
+        </TouchableOpacity>
+      }
+      rightComponent={
+        <TouchableOpacity
+          style={{
+            alignContent: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
+            backgroundColor: '#11111108',
+            borderRadius: 100,
+            padding: 10,
+            width: 48,
+            height: 48,
+          }}
+          onPress={rightComponentOnPress}>
+          <FontAwesome name={'arrow-right'} size={24} color={'#2E2E2E'} />
         </TouchableOpacity>
       }
       centerComponent={{

@@ -13,7 +13,7 @@ import {
   TDHeader,
 } from '@app/components';
 
-const VietllotScreen = () => {
+const VietllotDetailScreen = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
 
@@ -35,21 +35,17 @@ const VietllotScreen = () => {
     return (
       <View>
         <View style={styles.item}>
-          <Text style={styles.date}>{item.ngay_quay}</Text>
-          <Text style={styles.prize}>Prize: {item.prize}</Text>
-          <View style={styles.table}>
-            <Text style={styles.row}>Jackpot</Text>
-            <Text style={styles.row}>Giải Nhất</Text>
-            <Text style={styles.row}>Giải Nhì</Text>
-            <Text style={styles.row}>Giải Ba</Text>
-            <Text style={styles.row}>Kì Quay</Text>
+          <View style={styles.table1}>
+            <Text style={styles.date}>{item.ngay_quay}</Text>
+            <Text style={styles.prize}>Prize: {item.prize}</Text>
           </View>
-          <View style={styles.table}>
-            <Text style={styles.row}>{item.count_jackpot}</Text>
-            <Text style={styles.row}>{item.count_giainhat}</Text>
-            <Text style={styles.row}>{item.count_giainhi}</Text>
-            <Text style={styles.row}>{item.count_giaiba}</Text>
-            <Text style={styles.row}>{item.ki_quay}</Text>
+          <View style={styles.table2}>
+            <Text style={styles.number}>{item.ketqua_1}</Text>
+            <Text style={styles.number}>{item.ketqua_2}</Text>
+            <Text style={styles.number}>{item.ketqua_3}</Text>
+            <Text style={styles.number}>{item.ketqua_4}</Text>
+            <Text style={styles.number}>{item.ketqua_5}</Text>
+            <Text style={styles.number}>{item.ketqua_6}</Text>
           </View>
         </View>
       </View>
@@ -65,9 +61,6 @@ const VietllotScreen = () => {
         leftComponentOnPress={() => {
           navigation.goBack();
         }}
-        rightComponentOnPress={() => {
-          navigation.navigate('VietllotDetailScreen');
-        }}
       />
       {/* <FlatList data={Ketqua} renderItem={north} numColumns={1} ListEmptyComponent={<Text>No Reigons Available</Text>} /> */}
       <FlatList data={data} renderItem={renderItem} keyExtractor={item => item.id} />
@@ -75,38 +68,42 @@ const VietllotScreen = () => {
   );
 };
 
-export default VietllotScreen;
+export default VietllotDetailScreen;
 const styles = StyleSheet.create({
   bigContainer: {
     backgroundColor: '#CDF0CD',
   },
   item: {
-    flexDirection: 'column',
     padding: 15,
+    justifyContent: 'space-between',
     borderWidth: 1,
     borderColor: 'cyan',
-    margin: 5,
+    margin: 5
   },
-  row: {
-    fontSize: 15,
+  number: {
+    fontSize: 14,
     color: 'black',
-    flex: 1,
-    paddingHorizontal: 5,
-    paddingVertical: 5,
-    textAlign: 'right',
+    borderRadius: 50,
+    borderWidth: 1,
+    height: 23,
+    width: 23,
+    textAlign: 'center',
+    borderColor: 'crimson',
   },
   date: {
     fontSize: 15,
     color: 'black',
+    padding: 5
   },
   prize: {
     fontSize: 15,
     color: 'black',
     textAlign: 'right',
-    bottom: 20,
+    bottom: 30,
+    padding: 5
   },
-  table: {
+  table2:{
     flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
+    justifyContent: 'space-between',
+  }
 });
