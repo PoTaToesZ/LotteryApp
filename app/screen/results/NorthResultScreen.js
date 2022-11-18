@@ -27,7 +27,8 @@ const NorthResultScreen = () => {
     fetch(apiURL)
     .then((res) => res.json())
     .then((resJson) => {
-      setData(resJson)
+      setData(resJson);
+      // console.log(resJson)
     }).catch((error) => {
       console.log('Error:', error)
     }).finally(() => setIsLoading(false))
@@ -51,15 +52,15 @@ const NorthResultScreen = () => {
             <Text style={styles.row}>7</Text>
           </View>
           <View style={styles.table}>
-            <Text style={styles.row}>{item.lotData.MaDb}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
+            <Text style={styles.rowdata}>{item.lotData.MaDb}</Text>
+            <Text style={styles.rowdata}>{item.lotData.DB}</Text>
+            <Text style={styles.rowdata}>{item.lotData['1']}</Text>
+            <Text style={styles.rowdata}>{item.lotData['2']}</Text>
+            <Text style={styles.rowdata}>{item.lotData['3']}</Text>
+            <Text style={styles.rowdata}>{item.lotData['4']}</Text>
+            <Text style={styles.rowdata}>{item.lotData['5']}</Text>
+            <Text style={styles.rowdata}>{item.lotData['6']}</Text>
+            <Text style={styles.rowdata}>{item.lotData['7']}</Text>
           </View>
         </View>
       </View>
@@ -81,6 +82,7 @@ const NorthResultScreen = () => {
           data={data}
           renderItem={renderItem}
           keyExtractor={(item)=>`key-${item.id}`}
+
         />
       </View>
     </View>
@@ -91,16 +93,26 @@ export default NorthResultScreen;
 const styles = StyleSheet.create({
   bigContainer: {
     backgroundColor: '#CDF0CD',
-   
   },
   item: {
-    justifyContent: 'space-between',
-    borderWidth: 0.5,
+    justifyContent: 'space-around',
+    borderWidth: 1,
     borderColor: 'cyan',
     flexDirection: 'row',
+    margin: 5,
+ 
   },
   table: {
     flexDirection: 'column',
     flexWrap: 'wrap',
   },
+  rowdata:{
+    textAlign: 'center',
+    padding: 5,
+    margin: 5,
+  },
+  row:{
+    padding: 5,
+    margin: 5, 
+  }
 });

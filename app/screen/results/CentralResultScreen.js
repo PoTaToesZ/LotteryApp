@@ -23,11 +23,12 @@ const CentralResultScreen = () => {
     return () => {}
   },[])
   const getResult = () => {
-    const apiURL = "https://api.xoso.me/app/json-kq-mientrung?name=KQXS&v=2&ngay_quay=2022-11-05"
+    const apiURL = "https://api.xoso.me/app/json-kq-mientrung?ngay_quay=2022-11-08&date_range=7"
     fetch(apiURL)
     .then((res) => res.json())
     .then((resJson) => {
       setData(resJson)
+      console.log(resJson)
     }).catch((error) => {
       console.log('Error:', error)
     }).finally(() => setIsLoading(false))
@@ -51,15 +52,15 @@ const CentralResultScreen = () => {
             <Text style={styles.row}>7</Text>
           </View>
           <View style={styles.table}>
-            <Text style={styles.row}>{item.lotData.MaDb}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
-            <Text style={styles.row}>{item.lotData.DB}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
+            <Text style={styles.row}>{}</Text>
           </View>
         </View>
       </View>

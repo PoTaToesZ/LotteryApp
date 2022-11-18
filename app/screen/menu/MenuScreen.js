@@ -115,25 +115,31 @@ const styles = StyleSheet.create({
   northImg: {
     height: 120,
     width: 120,
+    borderRadius: 20,
   },
   centralImg: {
     height: 120,
     width: 120,
+    borderRadius: 20,
   },
   southImg: {
     height: 120,
     width: 120,
+    borderRadius: 20,
   },
   northTxt: {
     textAlign: 'center',
     paddingTop: 5,
+    fontSize: 15,
   },
   centralTxt: {
     textAlign: 'center',
     paddingTop: 5,
+    fontSize: 15,
   },
   southTxt: {
     textAlign: 'center',
     paddingTop: 5,
+    fontSize: 15,
   },
 });

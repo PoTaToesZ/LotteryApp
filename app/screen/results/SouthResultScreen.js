@@ -1,4 +1,16 @@
-import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert, Image, FlatList, Dimensions} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  TextInput,
+  View,
+  TouchableOpacity,
+  ScrollView,
+  Alert,
+  Image,
+  FlatList,
+  Dimensions,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
@@ -20,69 +32,122 @@ const SouthResultScreen = () => {
 
   useEffect(() => {
     getResult();
-    return () => {}
-  },[[]])
+    return () => {};
+  }, []);
   const getResult = () => {
-    const apiURL = "https://api.xoso.me/app/json-kq-miennam?name=KQXS&v=2&ngay_quay=2022-11-07"
+    const apiURL = 'https://api.xoso.me/app/json-kq-miennam?name=KQXS&ngay_quay=2022-11-07';
     fetch(apiURL)
-    .then((res) => res.json())
-    .then((resJson) => {
-      setData(resJson)
-    }).catch((error) => {
-      console.log('Error:', error)
-    }).finally(() => setIsLoading(false))
-  }
-
-  
+      .then(res => res.json())
+      .then(resJson => {
+        setData(resJson);
+      })
+      .catch(error => {
+        console.log('Error:', error);
+      })
+      .finally(() => setIsLoading(false));
+  };
 
   const renderItem = ({item, index}) => {
     return (
-      <View>
+      <SafeAreaView>
         <View style={styles.item}>
           <View style={styles.table}>
-            <Text style={styles.row}></Text>
-            <Text style={styles.row}>ĐB</Text>
-            <Text style={styles.row}>1</Text>
-            <Text style={styles.row}>2</Text>
-            <Text style={styles.row}>3</Text>
-            <Text style={styles.row}>4</Text>
-            <Text style={styles.row}>5</Text>
-            <Text style={styles.row}>6</Text>
-            <Text style={styles.row}>7</Text>
+            <Text style={styles.b1}>Thành Phố: </Text>
+            <Text style={styles.b1}>ĐB</Text>
+            <Text style={styles.b1}>1</Text>
+            <Text style={styles.b1}>2</Text>
+            <Text style={styles.b1}>3</Text>
+            <Text style={styles.b1}>4</Text>
+            <Text style={styles.b1}>5</Text>
+            <Text style={styles.b1}>6</Text>
+            <Text style={styles.b1}>7</Text>
           </View>
-          <View style={styles.table}>
-            <Text style={styles.row}>{item.data.provinceCode}</Text>
-            <Text style={styles.row}>{item.resultDate}</Text>
-            <Text style={styles.row}>{}</Text>
-            <Text style={styles.row}>{}</Text>
-            <Text style={styles.row}>{}</Text>
-            <Text style={styles.row}>{}</Text>
-            <Text style={styles.row}>{}</Text>
-            <Text style={styles.row}>{}</Text>
-            <Text style={styles.row}>{}</Text>
+          <View style={styles.table1}>
+            <Text style={styles.b1}>{item.provinceName}</Text>
+            <Text style={styles.b1}>{item.lotData.DB}</Text>
+            <Text style={styles.b1}>{item.lotData['1']}</Text>
+            <Text style={styles.b1}>{item.lotData['2']}</Text>
+            <Text style={styles.b1}>{item.lotData['3'].join('   ')}</Text>
+            <Text style={styles.b2}>{item.lotData['4'].join('   ')}</Text>
+            <Text style={styles.b1}>{item.lotData['5']}</Text>
+            <Text style={styles.b1}>{item.lotData['6'].join('   ')}</Text>
+            <Text style={styles.b1}>{item.lotData['7']}</Text>
           </View>
         </View>
-      </View>
-    )
-  }
+        <View style={styles.box0}>
+          <View style={styles.box1}>
+            <Text style={styles.b3}>Đầu</Text>
+            <Text style={styles.b3}>0</Text>
+            <Text style={styles.b3}>1</Text>
+            <Text style={styles.b3}>2</Text>
+            <Text style={styles.b3}>3</Text>
+            <Text style={styles.b3}>4</Text>
+            <Text style={styles.b3}>5</Text>
+            <Text style={styles.b3}>6</Text>
+            <Text style={styles.b3}>7</Text>
+            <Text style={styles.b3}>8</Text>
+            <Text style={styles.b3}>9</Text>
+          </View>
+          <View style={styles.box2}>
+            <Text style={styles.b3}>Đuôi</Text>
+            <Text style={styles.b3}>{item.dau['0'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.dau['1'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.dau['2'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.dau['3'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.dau['4'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.dau['5'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.dau['6'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.dau['7'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.dau['8'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.dau['9'].join(' ')}</Text>
+          </View>
+          <View style={styles.box3}>
+            <Text style={styles.b3}>Đầu</Text>
+            <Text style={styles.b3}>{item.duoi['0'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.duoi['1'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.duoi['2'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.duoi['3'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.duoi['4'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.duoi['5'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.duoi['6'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.duoi['7'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.duoi['8'].join(' ')}</Text>
+            <Text style={styles.b3}>{item.duoi['9'].join(' ')}</Text>
+          </View>
+          <View style={styles.box4}>
+            <Text style={styles.b3}>Đuôi</Text>
+            <Text style={styles.b3}>0</Text>
+            <Text style={styles.b3}>1</Text>
+            <Text style={styles.b3}>2</Text>
+            <Text style={styles.b3}>3</Text>
+            <Text style={styles.b3}>4</Text>
+            <Text style={styles.b3}>5</Text>
+            <Text style={styles.b3}>6</Text>
+            <Text style={styles.b3}>7</Text>
+            <Text style={styles.b3}>8</Text>
+            <Text style={styles.b3}>9</Text>
+          </View>
+        </View>
+        
+      </SafeAreaView>
+    );
+  };
 
   const route = useRoute();
   return (
-    <View style={{flex: 1, backgroundColor: '#CDF0CD'}}>
-      <TDHeader
-        title={'Ket qua'}
-        leftComponentOnPress={() => {
-          navigation.goBack();
-        }}
-      />
-      <View style={styles.bigContainer}>
-        {/* <FlatList data={Ketqua} renderItem={north} numColumns={1} ListEmptyComponent={<Text>No Reigons Available</Text>} /> */}
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item)=>`key-${item.id}`}
+    <View style={{backgroundColor: '#CDF0CD'}}>
+      <ScrollView>
+        <TDHeader
+          title={'Ket qua'}
+          leftComponentOnPress={() => {
+            navigation.goBack();
+          }}
         />
-      </View>
+        <View style={styles.bigContainer}>
+          {/* <FlatList data={Ketqua} renderItem={north} numColumns={1} ListEmptyComponent={<Text>No Reigons Available</Text>} /> */}
+          <FlatList data={data} renderItem={renderItem} keyExtractor={item => `key-${item.id}`} />
+        </View>
+      </ScrollView>
     </View>
   );
 };
@@ -91,16 +156,68 @@ export default SouthResultScreen;
 const styles = StyleSheet.create({
   bigContainer: {
     backgroundColor: '#CDF0CD',
-   
   },
   item: {
-    justifyContent: 'space-between',
-    borderWidth: 0.5,
-    borderColor: 'cyan',
     flexDirection: 'row',
+    marginBottom: 20,
+    borderWidth: 1,
+    borderColor: 'cyan',
+    padding: 5,
+    margin: 5,
   },
   table: {
     flexDirection: 'column',
-    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  table1: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    paddingLeft: 50,
+  },
+  b1: {
+    textAlign: 'center',
+    margin: 2,
+    fontSize: 15,
+    color: '#E97777',
+  },
+  b2: {
+    width: Dimensions.get('window').width / 2,
+    textAlign: 'center',
+    margin: 1,
+    fontSize: 15,
+    color: '#E97777',
+    margin: 2,
+  },
+  box1: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
+  box2: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    paddingLeft: 15,
+  },
+  box0:{
+    borderWidth: 1,
+    borderColor: 'cyan',
+    padding: 5,
+    margin: 5,
+    marginBottom: 20,
+    flexDirection: 'row',
+  },
+  b3:{
+    textAlign: 'center',
+    margin: 5,
+    padding: 3,
+    fontSize: 15,
+    color: '#BA94D1'
+  },
+  box3: {
+    flexDirection: 'column',
+    paddingLeft: 130,
+  },
+  box4: {
+    flexDirection: 'column',
+    paddingLeft: 15,
   },
 });
