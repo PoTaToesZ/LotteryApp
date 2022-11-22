@@ -56,14 +56,16 @@ const VietllotDetailScreen = () => {
 
   return (
     <View style={{flex: 1, backgroundColor: '#CDF0CD'}}>
-      <TDHeader
-        title={'MEGA 6/45'}
-        leftComponentOnPress={() => {
-          navigation.goBack();
-        }}
-      />
-      {/* <FlatList data={Ketqua} renderItem={north} numColumns={1} ListEmptyComponent={<Text>No Reigons Available</Text>} /> */}
-      <FlatList data={data} renderItem={renderItem} keyExtractor={item => item.id} />
+      <ScrollView>
+        <TDHeader
+          title={'MEGA 6/45'}
+          leftComponentOnPress={() => {
+            navigation.goBack();
+          }}
+        />
+        {/* <FlatList data={Ketqua} renderItem={north} numColumns={1} ListEmptyComponent={<Text>No Reigons Available</Text>} /> */}
+        <FlatList data={data} renderItem={renderItem} keyExtractor={item => item.id} />
+      </ScrollView>
     </View>
   );
 };
@@ -78,7 +80,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     borderWidth: 1,
     borderColor: 'cyan',
-    margin: 5
+    margin: 5,
   },
   number: {
     fontSize: 14,
@@ -93,17 +95,17 @@ const styles = StyleSheet.create({
   date: {
     fontSize: 15,
     color: 'black',
-    padding: 5
+    padding: 5,
   },
   prize: {
     fontSize: 15,
     color: 'black',
     textAlign: 'right',
     bottom: 30,
-    padding: 5
+    padding: 5,
   },
-  table2:{
+  table2: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-  }
+  },
 });

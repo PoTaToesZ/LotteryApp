@@ -8,68 +8,23 @@ import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDTextInputAccou
 const MenuScreen = () => {
   const navigation = useNavigation();
   const {width, height} = Dimensions.get('screen');
-
-  // const Reigons = [
-  //   {
-  //     id: '1',
-  //     name: 'Bắc',
-  //     image: require('@app/assets/images/north.png'),
-  //   },
-  //   {
-  //     id: '2',
-  //     name: 'Trung',
-  //     image: require('@app/assets/images/central.png'),
-  //   },
-  //   {
-  //     id: '3',
-  //     name: 'Nam',
-  //     image: require('@app/assets/images/south.png'),
-  //   },
-  //   {
-  //     id: '4',
-  //     name: 'Vietllot',
-  //     image: require('@app/assets/images/vietllot.png'),
-  //   },
-  //   {
-  //     id: '5',
-  //     name: 'Lịch Quay',
-  //     image: require('@app/assets/images/calendar.jpg'),
-  //   },
-  //   {
-  //     id: '6',
-  //     name: 'Dự Báo',
-  //     image: require('@app/assets/images/predict.jpg'),
-  //   },
-  // ];
-  // const reigon = ({item}) => (
-  //   <View style={styles.item}>
-  //     <TouchableOpacity >
-  //       <View>
-  //         <Text>Param</Text>
-  //         <Image source={item.image} style={styles.reigons} />
-  //       </View>
-  //       <Text style={styles.name}>{item.name}</Text>
-  //     </TouchableOpacity>
-  //   </View>
-  // );
   return (
     <View style={styles.bigContainer}>
-      {/* <FlatList data={Reigons} renderItem={reigon} numColumns={3} ListEmptyComponent={<Text>No Reigons Available</Text>} /> */}
       <View style={styles.row}>
         <TouchableOpacity onPress={() => {
-          navigation.navigate('NorthScreen');
+          navigation.navigate('NorthResultScreen');
         }}>
           <Image source={require('@app/assets/images/north.png')} style={styles.northImg} />
           <Text style={styles.northTxt}>Bắc</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
-          navigation.navigate('CentralScreen');
+          navigation.navigate('CentralResultScreen');
         }}>
           <Image source={require('@app/assets/images/central.png')} style={styles.centralImg} />
           <Text style={styles.centralTxt}>Trung</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
-          navigation.navigate('SouthScreen');
+          navigation.navigate('SouthResultScreen');
         }}>
           <Image source={require('@app/assets/images/south.png')} style={styles.southImg} />
           <Text style={styles.southTxt}>Nam</Text>

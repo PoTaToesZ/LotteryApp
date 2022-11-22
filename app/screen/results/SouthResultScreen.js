@@ -29,13 +29,14 @@ const SouthResultScreen = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [ngay_quay, setNgay_quay] = useState(1);
 
   useEffect(() => {
     getResult();
     return () => {};
   }, []);
   const getResult = () => {
-    const apiURL = 'https://api.xoso.me/app/json-kq-miennam?name=KQXS&ngay_quay=2022-11-07';
+    const apiURL = `https://api.xoso.me/app/json-kq-miennam?name=KQXS&ngay_quay=${ngay_quay}`;
     fetch(apiURL)
       .then(res => res.json())
       .then(resJson => {
@@ -51,6 +52,7 @@ const SouthResultScreen = () => {
     return (
       <SafeAreaView>
         <View style={styles.item}>
+          
           <View style={styles.table}>
             <Text style={styles.b1}>Thành Phố: </Text>
             <Text style={styles.b1}>ĐB</Text>
@@ -135,16 +137,16 @@ const SouthResultScreen = () => {
 
   const route = useRoute();
   return (
-    <View style={{backgroundColor: '#CDF0CD'}}>
+    <View style={{backgroundColor: '#D1F5FA', flex: 1}}>
       <ScrollView>
         <TDHeader
-          title={'Ket qua'}
+          title={'Xổ Số Miền Nam'}
           leftComponentOnPress={() => {
             navigation.goBack();
           }}
         />
-        <View style={styles.bigContainer}>
-          {/* <FlatList data={Ketqua} renderItem={north} numColumns={1} ListEmptyComponent={<Text>No Reigons Available</Text>} /> */}
+        <View>
+        <TextInput style={styles.textInput} type="text" value={ngay_quay} onChangeText={value => setNgay_quay(value)} />
           <FlatList data={data} renderItem={renderItem} keyExtractor={item => `key-${item.id}`} />
         </View>
       </ScrollView>
@@ -154,9 +156,6 @@ const SouthResultScreen = () => {
 
 export default SouthResultScreen;
 const styles = StyleSheet.create({
-  bigContainer: {
-    backgroundColor: '#CDF0CD',
-  },
   item: {
     flexDirection: 'row',
     marginBottom: 20,
@@ -204,6 +203,7 @@ const styles = StyleSheet.create({
     margin: 5,
     marginBottom: 20,
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   b3:{
     textAlign: 'center',
@@ -214,10 +214,11 @@ const styles = StyleSheet.create({
   },
   box3: {
     flexDirection: 'column',
-    paddingLeft: 130,
   },
   box4: {
     flexDirection: 'column',
-    paddingLeft: 15,
+  },
+  textInput: {
+    borderWidth: 1,
   },
 });

@@ -7,6 +7,7 @@ import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDTextInputAccou
 
 const SouthScreen = () => {
     const navigation = useNavigation();
+    
     const NorthDay=[
         {
             id:'1',
@@ -43,7 +44,9 @@ const SouthScreen = () => {
     ]
     const ndiw = ({item}) => (
         <View style={styles.item}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => {
+          navigation.navigate('SouthResultScreen', {date: item.name});
+        }}>
           <Text style={styles.name}>{item.name}</Text>
           </TouchableOpacity>
         </View>
