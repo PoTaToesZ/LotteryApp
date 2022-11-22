@@ -145,7 +145,7 @@ const SouthResultScreen = () => {
             navigation.goBack();
           }}
         />
-        <View>
+        <View style={{justifyContent: 'center',alignItems: 'center'}}>
         <TextInput style={styles.textInput} type="text" value={ngay_quay} onChangeText={value => setNgay_quay(value)} />
           <FlatList data={data} renderItem={renderItem} keyExtractor={item => `key-${item.id}`} />
         </View>
@@ -220,5 +220,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderWidth: 1,
+    width: 100,
+    justifyContent: 'center',
+    borderColor: '#FFA9A3'
   },
 });
