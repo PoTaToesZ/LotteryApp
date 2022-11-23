@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert, Image, FlatList, Dimensions} from 'react-native';
+import {StyleSheet, Text, TextInput, View,Button, TouchableOpacity, ScrollView, Alert, Image, FlatList, Dimensions} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 
@@ -29,10 +29,8 @@ const CentralResultScreen = () => {
       .then(res => res.json())
       .then(resJson => {
         setData(resJson);
-        console.log(resJson);
       })
       .catch(error => {
-        console.log('Error:', error);
       })
       .finally(() => setIsLoading(false));
   };
@@ -124,7 +122,7 @@ const CentralResultScreen = () => {
 
   const route = useRoute();
   return (
-    <View style={{flex: 1, backgroundColor: '#D1F5FA'}}>
+    <View style={{flex: 1, backgroundColor: '#C3E991'}}>
       <ScrollView>
         <TDHeader
           title={'Xổ Số Miền Trung'}
@@ -133,7 +131,8 @@ const CentralResultScreen = () => {
           }}
         />
         <View style={{justifyContent: 'center',alignItems: 'center'}}>
-        <TextInput style={styles.textInput} type="text" value={ngay_quay} onChangeText={value => setNgay_quay(value)} />
+        <TextInput style={styles.textInput} type="text" placeholder="Ex: 2022-11-11" keyboardType= 'number-pad' value={ngay_quay} onChangeText={value => setNgay_quay(value)} />
+          <Button title="Search" onClick={getResult(ngay_quay)}/>
           <FlatList data={data} renderItem={renderItem} keyExtractor={item => `key-${item.id}`} 
           />
         </View>
@@ -156,7 +155,7 @@ const styles = StyleSheet.create({
     borderColor: 'cyan',
     flexDirection: 'row',
     margin: 10,
-    padding: 10,
+    padding: 9,
   },
   table: {
     flexDirection: 'column',
@@ -166,19 +165,19 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 10,
     margin: 10,
-    color: '#EBDA13',
+    color: '#5C6672',
   },
   rowdata4: {
     textAlign: 'center',
     padding: 10,
     margin: 10,
-    color: '#EBDA13',
+    color: '#5C6672',
     width: Dimensions.get('window').width / 2,
   },
   row: {
     padding: 10,
     margin: 11,
-    color: '#D1AB8C',
+    color: '#E85D75',
   },
   box1: {
     flexDirection: 'column',

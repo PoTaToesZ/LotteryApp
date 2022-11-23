@@ -1,5 +1,5 @@
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert, Image, FlatList, Dimensions} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
 
 import {Colors, Fonts, Images} from '@app/themes';
@@ -7,7 +7,25 @@ import {TDButtonPrimary, TDButtonSecondary, TDDividerWithTitle, TDTextInputAccou
 
 const CentralScreen = () => {
     const navigation = useNavigation();
-
+    const [ngay_quay, setNgay_quay] = useState(1);
+    const [data, setData] = useState();
+    useEffect(() => {
+      getResult();
+      return () => {};
+    }, []);
+    const getResult = () => {
+      const apiURL = `https://api.xoso.me/app/json-kq-mientrung?name=KQXS&ngay_quay=${ngay_quay}`;
+      fetch(apiURL)
+        .then(res => res.json())
+        .then(resJson => {
+          setData(resJson);
+          console.log(resJson);
+        })
+        .catch(error => {
+          console.log('Error:', error);
+        })
+        .finally(() => setIsLoading(false));
+    };
     const NorthDay=[
         {
             id:'1',
@@ -50,7 +68,7 @@ const CentralScreen = () => {
         </View>
       );
   return (
-    <View style={{ backgroundColor: '#D1F5FA', flex:1}}>
+    <View style={{ backgroundColor: '#83BCFF', flex:1}}>
         <TDHeader
         title={'Xổ Số Miền Trung'}
         leftComponentOnPress={() => {
@@ -58,11 +76,11 @@ const CentralScreen = () => {
         }}
       />
         <FlatList data={NorthDay} renderItem={ndiw} numColumns={4} ListEmptyComponent={<Text>No Reigons Available</Text>} />
-      <Text>CentralScreen</Text>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('CentralResultScreen');
-        }}>
+        }}
+        >
         <Text style={{color: Colors.primary, fontSize: 16, fontWeight: 'bold'}}>Central Result Screen</Text>
       </TouchableOpacity>
     </View>

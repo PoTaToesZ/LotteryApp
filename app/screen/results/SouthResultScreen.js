@@ -137,7 +137,7 @@ const SouthResultScreen = () => {
 
   const route = useRoute();
   return (
-    <View style={{backgroundColor: '#D1F5FA', flex: 1}}>
+    <View style={{backgroundColor: '#C3E991', flex: 1}}>
       <ScrollView>
         <TDHeader
           title={'Xổ Số Miền Nam'}
@@ -146,7 +146,7 @@ const SouthResultScreen = () => {
           }}
         />
         <View style={{justifyContent: 'center',alignItems: 'center'}}>
-        <TextInput style={styles.textInput} type="text" value={ngay_quay} onChangeText={value => setNgay_quay(value)} />
+        <TextInput style={styles.textInput} type="text" placeholder="Ex: 2022-11-11" value={ngay_quay} onChangeText={value => setNgay_quay(value)} />
           <FlatList data={data} renderItem={renderItem} keyExtractor={item => `key-${item.id}`} />
         </View>
       </ScrollView>
@@ -160,9 +160,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginBottom: 20,
     borderWidth: 1,
-    borderColor: 'cyan',
-    padding: 5,
-    margin: 5,
+    borderColor: '#CB904D',
+    padding: 10,
+    margin: 10,
   },
   table: {
     flexDirection: 'column',
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
   },
   box0:{
     borderWidth: 1,
-    borderColor: 'cyan',
+    borderColor: '#455561',
     padding: 5,
     margin: 5,
     marginBottom: 20,

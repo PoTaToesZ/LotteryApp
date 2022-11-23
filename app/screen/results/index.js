@@ -2,5 +2,10 @@ import NorthResultScreen from './NorthResultScreen';
 import CentralResultScreen from './CentralResultScreen';
 import SouthResultScreen from './SouthResultScreen';
 import VietllotDetailScreen from './VietllotDetailScreen';
-
-export {NorthResultScreen,CentralResultScreen,SouthResultScreen,VietllotDetailScreen};
+import VietllotPowerScreen from './VietllotPowerScreen';
+import Max3DScreen from './Max3DScreen';
+import Max4DScreen from './Max4DScreen';
+import PowerDetailScreen from './PowerDetailScreen';
+import Max4DDetailScreen from './Max4DDetailScreen';
+import Max3DDetailScreen from './Max3DDetailScreen';
+export {Max4DDetailScreen,Max3DDetailScreen,PowerDetailScreen,VietllotPowerScreen,Max3DScreen,Max4DScreen,NorthResultScreen,CentralResultScreen,SouthResultScreen,VietllotDetailScreen};

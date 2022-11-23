@@ -18,7 +18,7 @@ const MenuScreen = () => {
           <Text style={styles.northTxt}>Bắc</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
-          navigation.navigate('CentralResultScreen');
+          navigation.navigate('CentralResultsScreen');
         }}>
           <Image source={require('@app/assets/images/central.png')} style={styles.centralImg} />
           <Text style={styles.centralTxt}>Trung</Text>
@@ -33,7 +33,7 @@ const MenuScreen = () => {
 
       <View style={styles.row}>
         <TouchableOpacity onPress={() => {
-          navigation.navigate('VietllotScreen');
+          navigation.navigate('VietllotMenuScreen');
         }}>
           <Image source={require('@app/assets/images/vietllot.png')} style={styles.northImg} />
           <Text style={styles.northTxt}>Vietllot</Text>

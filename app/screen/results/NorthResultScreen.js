@@ -124,7 +124,7 @@ const NorthResultScreen = () => {
 
   const route = useRoute();
   return (
-    <View style={{flex: 1, backgroundColor: '#D1F5FA'}}>
+    <View style={{flex: 1, backgroundColor: '#B9E6FF'}}>
       <ScrollView>
       <TDHeader
         title={'Xổ Số Miền Bắc(7Days)'}

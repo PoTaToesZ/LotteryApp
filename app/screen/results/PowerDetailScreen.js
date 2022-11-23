@@ -13,13 +13,13 @@ import {
   TDHeader,
 } from '@app/components';
 
-const VietllotDetailScreen = () => {
+const PowerDetailScreen = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
 
   const getResult = async () => {
     try {
-      let response = await fetch('https://api.xoso.me/app/json-mega?page=1');
+      let response = await fetch('https://api.xoso.me/app/json-power?page=1');
       let json = await response.json();
       setData(json.data);
     } catch (error) {
@@ -37,7 +37,6 @@ const VietllotDetailScreen = () => {
         <View style={styles.item}>
           <View >
             <Text style={styles.date}>{item.ngay_quay}</Text>
-            <Text style={styles.prize}>Prize: {item.prize}</Text>
           </View>
           <View style={styles.table2}>
             <Text style={styles.number}>{item.ketqua_1}</Text>
@@ -46,6 +45,7 @@ const VietllotDetailScreen = () => {
             <Text style={styles.number}>{item.ketqua_4}</Text>
             <Text style={styles.number}>{item.ketqua_5}</Text>
             <Text style={styles.number}>{item.ketqua_6}</Text>
+            <Text style={styles.number}>{item.ketqua_7}</Text>
           </View>
         </View>
       </View>
@@ -58,7 +58,7 @@ const VietllotDetailScreen = () => {
     <View style={{flex: 1, backgroundColor: '#CDF0CD'}}>
       <ScrollView>
         <TDHeader
-          title={'MEGA 6/45'}
+          title={'POWER 6/55'}
           leftComponentOnPress={() => {
             navigation.goBack();
           }}
@@ -69,7 +69,7 @@ const VietllotDetailScreen = () => {
   );
 };
 
-export default VietllotDetailScreen;
+export default PowerDetailScreen;
 const styles = StyleSheet.create({
   bigContainer: {
     backgroundColor: '#CDF0CD',
@@ -95,6 +95,8 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: 'black',
     padding: 5,
+    marginTop: 5,
+    marginBottom: 10
   },
   prize: {
     fontSize: 15,
