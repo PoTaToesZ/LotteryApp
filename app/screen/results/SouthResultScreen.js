@@ -52,7 +52,6 @@ const SouthResultScreen = () => {
     return (
       <SafeAreaView>
         <View style={styles.item}>
-          
           <View style={styles.table}>
             <Text style={styles.b1}>Thành Phố: </Text>
             <Text style={styles.b1}>ĐB</Text>
@@ -130,7 +129,6 @@ const SouthResultScreen = () => {
             <Text style={styles.b3}>9</Text>
           </View>
         </View>
-        
       </SafeAreaView>
     );
   };
@@ -145,8 +143,14 @@ const SouthResultScreen = () => {
             navigation.goBack();
           }}
         />
-        <View style={{justifyContent: 'center',alignItems: 'center'}}>
-        <TextInput style={styles.textInput} type="text" placeholder="Ex: 2022-11-11" value={ngay_quay} onChangeText={value => setNgay_quay(value)} />
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <TextInput
+            style={styles.textInput}
+            type="text"
+            placeholder="Ex: 2022-11-11"
+            value={ngay_quay}
+            onChangeText={value => setNgay_quay(value)}
+          />
           <FlatList data={data} renderItem={renderItem} keyExtractor={item => `key-${item.id}`} />
         </View>
       </ScrollView>
@@ -196,7 +200,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingLeft: 15,
   },
-  box0:{
+  box0: {
     borderWidth: 1,
     borderColor: '#455561',
     padding: 5,
@@ -205,12 +209,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  b3:{
+  b3: {
     textAlign: 'center',
     margin: 5,
     padding: 3,
     fontSize: 15,
-    color: '#BA94D1'
+    color: '#BA94D1',
   },
   box3: {
     flexDirection: 'column',
@@ -222,6 +226,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     width: 100,
     justifyContent: 'center',
-    borderColor: '#FFA9A3'
+    borderColor: '#FFA9A3',
   },
 });
