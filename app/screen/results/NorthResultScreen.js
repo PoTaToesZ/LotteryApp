@@ -1,7 +1,9 @@
 import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert, Image, FlatList, Dimensions} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
-
+import DatePicker from 'react-native-date-picker';
+import {ActivityIndicator, RadioButton} from 'react-native-paper';
+import moment from 'moment';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Colors, Fonts, Images} from '@app/themes';
 import {
@@ -15,199 +17,168 @@ import {
 
 const NorthResultScreen = () => {
   const navigation = useNavigation();
-  const [data, setData] = useState();
+  const [checked, setChecked] = React.useState('first');
   const [isLoading, setIsLoading] = useState(true);
-  const [ngay_quay, setNgay_quay] = useState(1);
+  const [data, setData] = useState([]);
+  const [dataHead, setDataHead] = useState([]);
+  const [dataTail, setDataTail] = useState([]);
+  const [date, setDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     getResult();
-    return () => {}
-  },[])
+    return () => {};
+  }, [date]);
   const getResult = () => {
-    const apiURL = `https://api.xoso.me/app/json-kq-mienbac?date_range=7&ngay_quay=${ngay_quay}`
+    const apiURL = `https://api.xoso.me/app/json-kq-mienbac?name=KQXS&v=2&ngay_quay=${moment(date).format('YYYY-MM-DD')}`;
     fetch(apiURL)
-    .then((res) => res.json())
-    .then((resJson) => {
-      setData(resJson);
-      console.log(resJson)
-    }).catch((error) => {
-      console.log('Error:', error)
-    }).finally(() => setIsLoading(false))
-  }
+      .then(res => res.json())
+      .then(resJson => {
+        setData(resJson.data.lotData);
+        setDataHead(resJson.data.dau);
+        setDataTail(resJson.data.duoi);
+      })
+      .catch(error => {
+        console.log('Error:', error);
+      })
+      .finally(() => setIsLoading(false));
+  };
+  const handleData = data => {
+    let dataSource = [];
+    for (let item in data) {
+      dataSource.push({
+        position: item,
+        result: data[item].join('     '),
+      });
+    }
+    // console.log(dataSource)
+    return dataSource;
+  };
+  let dataLotData = handleData(data);
+  console.log(dataLotData);
+  let dataHeadProcess = handleData(dataHead);
+  let dataTailProcess = handleData(dataTail);
 
-  
-
-  const renderItem = ({item, index}) => {
-    return (
-      <View>
-        <View style={styles.item}>
-          <View style={styles.table}>
-            <Text style={styles.row}></Text>
-            <Text style={styles.row}>ĐB</Text>
-            <Text style={styles.row}>1</Text>
-            <Text style={styles.row}>2</Text>
-            <Text style={styles.row}>3</Text>
-            <Text style={styles.row}>4</Text>
-            <Text style={styles.row}>5</Text>
-            <Text style={styles.row}>6</Text>
-            <Text style={styles.row}>7</Text>
-          </View>
-          <View style={styles.table}>
-            <Text style={styles.rowdata}>{item.lotData.MaDb.join('  ')}</Text>
-            <Text style={styles.rowdata}>{item.lotData.DB}</Text>
-            <Text style={styles.rowdata}>{item.lotData['1']}</Text>
-            <Text style={styles.rowdata}>{item.lotData['2'].join('  ')}</Text>
-            <Text style={styles.rowdata}>{item.lotData['3'].join('  ')}</Text>
-            <Text style={styles.rowdata}>{item.lotData['4'].join('  ')}</Text>
-            <Text style={styles.rowdata}>{item.lotData['5'].join('  ')}</Text>
-            <Text style={styles.rowdata}>{item.lotData['6'].join('  ')}</Text>
-            <Text style={styles.rowdata}>{item.lotData['7'].join('  ')}</Text>
-          </View>
-        </View>
-        <View style={styles.box0}>
-          <View style={styles.box1}>
-            <Text style={styles.b3}>Đầu</Text>
-            <Text style={styles.b3}>0</Text>
-            <Text style={styles.b3}>1</Text>
-            <Text style={styles.b3}>2</Text>
-            <Text style={styles.b3}>3</Text>
-            <Text style={styles.b3}>4</Text>
-            <Text style={styles.b3}>5</Text>
-            <Text style={styles.b3}>6</Text>
-            <Text style={styles.b3}>7</Text>
-            <Text style={styles.b3}>8</Text>
-            <Text style={styles.b3}>9</Text>
-          </View>
-          <View style={styles.box2}>
-            <Text style={styles.b3}>Đuôi</Text>
-            <Text style={styles.b3}>{item.dau['0'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.dau['1'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.dau['2'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.dau['3'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.dau['4'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.dau['5'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.dau['6'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.dau['7'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.dau['8'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.dau['9'].join(' ')}</Text>
-          </View>
-          <View style={styles.box3}>
-            <Text style={styles.b3}>Đầu</Text>
-            <Text style={styles.b3}>{item.duoi['0'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.duoi['1'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.duoi['2'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.duoi['3'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.duoi['4'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.duoi['5'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.duoi['6'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.duoi['7'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.duoi['8'].join(' ')}</Text>
-            <Text style={styles.b3}>{item.duoi['9'].join(' ')}</Text>
-          </View>
-          <View style={styles.box4}>
-            <Text style={styles.b3}>Đuôi</Text>
-            <Text style={styles.b3}>0</Text>
-            <Text style={styles.b3}>1</Text>
-            <Text style={styles.b3}>2</Text>
-            <Text style={styles.b3}>3</Text>
-            <Text style={styles.b3}>4</Text>
-            <Text style={styles.b3}>5</Text>
-            <Text style={styles.b3}>6</Text>
-            <Text style={styles.b3}>7</Text>
-            <Text style={styles.b3}>8</Text>
-            <Text style={styles.b3}>9</Text>
-          </View>
-        </View>
-      </View>
-    )
-  }
-
-  const route = useRoute();
   return (
-    <View style={{flex: 1, backgroundColor: '#B9E6FF'}}>
-      <ScrollView>
+    <ScrollView style={{backgroundColor: '#B9E6FF'}}>
       <TDHeader
-        title={'Xổ Số Miền Bắc(7Days)'}
+        title={'Xổ Số Miền Bắc'}
         leftComponentOnPress={() => {
           navigation.goBack();
         }}
       />
-      <View style={{justifyContent: 'center',alignItems: 'center'}}>
-      <TextInput style={styles.textInput} type="text" placeholder="Ex: 2022-11-11" value={ngay_quay} onChangeText={value => setNgay_quay(value)} />
-        <FlatList
-          data={data}
-          renderItem={renderItem}
-          keyExtractor={(item)=>`key-${item.id}`}
-        />
+      <TouchableOpacity style={{backgroundColor: '#B9E6FF'}} onPress={() => setOpen(true)}>
+        <Text style={styles.chooseDate}>{moment(date).format('YYYY-MM-DD')}</Text>
+      </TouchableOpacity>
+      <DatePicker
+        modal
+        open={open}
+        date={date}
+        onConfirm={date => {
+          setOpen(false);
+          setDate(date);
+        }}
+        onCancel={() => {
+          setOpen(false);
+        }}
+      />
+      <View style={styles.container1}>
+        {dataLotData.map(i => {
+          var d = i.result.split('').map(e => parseInt(e));
+          var e = i.result.split('').map(e => parseInt(e));
+          return (
+            <View style={styles.boxData1}>
+              <Text style={styles.kq}>{i.position}</Text>
+              <Text style={styles.data1}>{i.result}</Text>
+            </View>
+          );
+        })}
       </View>
-      </ScrollView>
-    </View>
+      <View>
+        <View style={styles.container2}>
+          <View style={{marginTop:20}}>
+            <Text style={styles.title}>Đầu</Text>
+            {dataHeadProcess.map(item => {
+              return (
+                <View style={styles.boxData2}>
+                  <Text style={styles.place}>{item.position}</Text>
+                  <Text style={styles.data2}>{item.result}</Text>
+                </View>
+              );
+            })}
+          </View>
+          <View style={{marginTop:20}}>
+            <Text style={styles.title}>Đuôi</Text>
+            {dataTailProcess.map(item => {
+              return (
+                <View style={styles.boxData2}>
+                  <Text style={styles.place}>{item.position}</Text>
+                  <Text style={styles.data2}>{item.result}</Text>
+                </View>
+              );
+            })}
+          </View>
+        </View>
+      </View>
+    </ScrollView>
   );
 };
 
 export default NorthResultScreen;
 const styles = StyleSheet.create({
-
-  item: {
-    justifyContent: 'space-around',
-    borderWidth: 1,
-    borderColor: 'cyan',
-    flexDirection: 'row',
-    margin: 10,
-    padding: 10,
-    
-  },
-  table: {
-    flexDirection: 'column',
-    flexWrap: 'wrap',
-  
-  },
-  rowdata:{
+  chooseDate: {
     textAlign: 'center',
-    padding: 5,
-    margin: 5,
-    color: '#FB2576'
   },
-  row:{
-    padding: 5,
-    margin: 5, 
-    color: '#6C4AB6'
+  container1: {
+    marginTop: 20,
   },
-  box1: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+  container2:{
+    marginTop: 10, 
+    flexDirection: 'row', 
+    justifyContent: 'space-around'
   },
-  box2: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    paddingLeft: 15,
-  },
-  box0:{
-    borderWidth: 1,
-    borderColor: 'cyan',
-    padding: 10,
-    margin: 10,
-    marginBottom: 10,
+  boxData1: {
+    backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-between',
-  },
-  b3:{
-    textAlign: 'center',
-    margin: 5,
-    padding: 3,
-    fontSize: 15,
-    color: '#0C7B93'
-  },
-  box3: {
-    flexDirection: 'column',
-  },
-  box4: {
-    flexDirection: 'column',
-  },
-  textInput: {
+    marginHorizontal: 10,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderWidth: 1,
-    width: 100,
-    justifyContent: 'center',
-    borderColor: '#FFA9A3'
+    alignItems: 'center',
   },
+  data1: {
+    width: Dimensions.get('window').width / 2,
+    textAlign: 'center',
+    fontSize: 16,
+    color: 'black',
+  },
+  kq: {
+    fontSize: 16,
+    color: 'black',
+    width: Dimensions.get('window').width / 4,
+    textAlign: 'center',
+  },
+  boxData2:{
+    flexDirection: 'row',
+    paddingVertical: 10,
+    justifyContent: 'space-between'
+  },
+  place:{
+    textAlign: 'center',
+    paddingRight: 10,
+    borderRightWidth: 1,
+    borderLeftWidth: 1,
+    paddingLeft: 10,
+  },
+  data2:{
+    textAlign: 'center',
+    paddingLeft: 20,
+  },
+  title: 
+  {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  }
 });

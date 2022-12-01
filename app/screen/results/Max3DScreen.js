@@ -19,7 +19,7 @@ const Max3DScreen = () => {
 
   const getResult = async () => {
     try {
-      let response = await fetch('https://api.xoso.me/app/json-max4d?page=1');
+      let response = await fetch('https://api.xoso.me/app/json-max3d?page=1');
       let json = await response.json();
       setData(json.data);
     } catch (error) {

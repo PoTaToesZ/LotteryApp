@@ -18,7 +18,7 @@ const MenuScreen = () => {
           <Text style={styles.northTxt}>Bắc</Text>
         </TouchableOpacity>
         <TouchableOpacity onPress={() => {
-          navigation.navigate('CentralResultsScreen');
+          navigation.navigate('CentralResultScreen');
         }}>
           <Image source={require('@app/assets/images/central.png')} style={styles.centralImg} />
           <Text style={styles.centralTxt}>Trung</Text>

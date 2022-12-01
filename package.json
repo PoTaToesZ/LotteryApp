@@ -28,6 +28,7 @@
     "react-native-calendar": "^0.13.1",
     "react-native-calendars": "^1.1291.1",
     "react-native-config": "^1.4.6",
+    "react-native-date-picker": "^4.2.6",
     "react-native-device-info": "^10.2.1",
     "react-native-elements": "^3.4.2",
     "react-native-flash-message": "^0.3.1",
