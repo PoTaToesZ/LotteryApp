@@ -75,7 +75,7 @@ const SouthResultScreen = () => {
             navigation.goBack();
           }}
         />
-        <TouchableOpacity style={{backgroundColor: '#C3E991'}} onPress={() => setOpen(true)}>
+        <TouchableOpacity style={{backgroundColor: '#fff', borderRadius: 20, width: 100, marginLeft: 160}} onPress={() => setOpen(true)}>
           <Text style={styles.chooseDate}>{moment(date).format('YYYY-MM-DD')}</Text>
         </TouchableOpacity>
         <DatePicker
@@ -94,7 +94,7 @@ const SouthResultScreen = () => {
           {data.length > 0 &&
             data.map(item => (
               <View>
-                <Text style={{textAlign: 'center', marginVertical: 20, fontSize: 20, fontWeight: 'bold'}}>{item.name}</Text>
+                <Text style={styles.nameTitle1}>{item.name}</Text>
                 {item.dataProcess.map(i => {
                   var d = i.result.split('').map(e => parseInt(e));
                   var e = i.result.split('').map(e => parseInt(e));
@@ -187,13 +187,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   boxData2:{
-    paddingVertical: 10,
+    paddingVertical: 20,
     paddingHorizontal: 10,
-    width: Dimensions.get('window').width / 3,
     flexDirection: 'row', 
+    width: Dimensions.get('window').width / 3,
+
   },
   place:{
     textAlign: 'center',
+    justifyContent: 'center',
   },
   data2:{
     textAlign: 'center',
@@ -203,5 +205,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  nameTitle1:{
+    textAlign: 'center', 
+    marginVertical: 20, 
+    fontSize: 20, 
+    fontWeight: 'bold'
   }
 });

@@ -68,85 +68,87 @@ const CentralResultScreen = () => {
   };
 
   return (
-      <ScrollView style={{backgroundColor: '#FFA9A3'}}>
-        <TDHeader
-          title={'Xổ Số Miền Trung'}
-          leftComponentOnPress={() => {
-            navigation.goBack();
-          }}
-        />
-        <TouchableOpacity style={{backgroundColor: '#FFA9A3'}} onPress={() => setOpen(true)}>
-          <Text style={styles.chooseDate}>{moment(date).format('YYYY-MM-DD')}</Text>
-        </TouchableOpacity>
-        <DatePicker
-          modal
-          open={open}
-          date={date}
-          onConfirm={date => {
-            setOpen(false);
-            setDate(date);
-          }}
-          onCancel={() => {
-            setOpen(false);
-          }}
-        />
-        <View>
-          {data.length > 0 &&
-            data.map(item => (
+    <ScrollView style={{backgroundColor: '#FFA9A3'}}>
+      <TDHeader
+        title={'Xổ Số Miền Trung'}
+        leftComponentOnPress={() => {
+          navigation.goBack();
+        }}
+      />
+      <TouchableOpacity
+        style={{backgroundColor: '#fff', borderRadius: 20, width: 100, marginLeft: 160}}
+        onPress={() => setOpen(true)}>
+        <Text style={styles.chooseDate}>{moment(date).format('YYYY-MM-DD')}</Text>
+      </TouchableOpacity>
+      <DatePicker
+        modal
+        open={open}
+        date={date}
+        onConfirm={date => {
+          setOpen(false);
+          setDate(date);
+        }}
+        onCancel={() => {
+          setOpen(false);
+        }}
+      />
+      <View>
+        {data.length > 0 &&
+          data.map(item => (
+            <View>
+              <Text style={styles.nameTitle1}>{item.name}</Text>
+              {item.dataProcess.map(i => {
+                var d = i.result.split('').map(e => parseInt(e));
+                var e = i.result.split('').map(e => parseInt(e));
+                return (
+                  <View style={styles.boxData1}>
+                    <Text style={styles.kq}>{i.position}</Text>
+                    <Text style={styles.data1}>{i.result}</Text>
+                  </View>
+                );
+              })}
+            </View>
+          ))}
+      </View>
+      <View style={styles.container2}>
+        <Text style={styles.title}>Đầu</Text>
+        <View style={{flexDirection: 'row', marginTop: 10}}>
+          {dataHead.length > 0 &&
+            dataHead.map(item => (
               <View>
-                <Text style={{textAlign: 'center', marginVertical: 20, fontSize: 20, fontWeight: 'bold'}}>{item.name}</Text>
-                {item.dataProcess.map(i => {
-                  var d = i.result.split('').map(e => parseInt(e));
-                  var e = i.result.split('').map(e => parseInt(e));
+                <Text style={styles.nameTitle}>{item.name}</Text>
+                {item.dataHeadProcess.map(i => {
                   return (
-                    <View style={styles.boxData1}>
-                      <Text style={styles.kq}>{i.position}</Text>
-                      <Text style={styles.data1}>{i.result}</Text>
+                    <View style={styles.boxData2}>
+                      <Text style={styles.place}>{i.position}</Text>
+                      <Text style={styles.data2}>{i.result}</Text>
                     </View>
                   );
                 })}
               </View>
             ))}
         </View>
-        <View style={styles.container2}>
-        <Text style={styles.title}>Đầu</Text>
-          <View style={{flexDirection: 'row',marginTop: 10}}>
-            {dataHead.length > 0 &&
-              dataHead.map(item => (
-                <View>
-                  <Text style={styles.nameTitle}>{item.name}</Text>
-                  {item.dataHeadProcess.map(i => {
-                    return (
-                      <View style={styles.boxData2}>
-                        <Text style={styles.place}>{i.position}</Text>
-                        <Text style={styles.data2}>{i.result}</Text>
-                      </View>
-                    );
-                  })}
-                </View>
-              ))}
-          </View>
-        </View>
-        <View style={styles.container2}>
+      </View>
+      <View style={styles.container2}>
         <Text style={styles.title}>Đuôi</Text>
-          <View style={{flexDirection: 'row', marginTop: 10}}>
-            {dataTail.length > 0 &&
-              dataTail.map(item => (
-                <View>
-                  <Text style={styles.nameTitle}>{item.name}</Text>
-                  {item.dataTailProcess.map(i => {
-                    return (
-                      <View style={styles.boxData2}>
-                        <Text style={styles.place}>{i.position}</Text>
-                        <Text style={styles.data2}>{i.result}</Text>
-                      </View>
-                    );
-                  })}
-                </View>
-              ))}
-          </View>
+        <View style={{flexDirection: 'row', marginTop: 10}}>
+          {dataTail.length > 0 &&
+            dataTail.map(item => (
+              <View>
+                <Text style={styles.nameTitle}>{item.name}</Text>
+                {item.dataTailProcess.map(i => {
+                  return (
+                    <View style={styles.boxData2}>
+                      <Text style={styles.place}>{i.position}</Text>
+                      <Text style={styles.data2}>{i.result}</Text>
+                    </View>
+                  );
+                })}
+              </View>
+            ))}
         </View>
-      </ScrollView>
+      </View>
+    </ScrollView>
   );
 };
 
@@ -155,9 +157,9 @@ const styles = StyleSheet.create({
   chooseDate: {
     textAlign: 'center',
   },
-  container2:{
-    marginTop: 10, 
-    justifyContent: 'space-around'
+  container2: {
+    marginTop: 10,
+    justifyContent: 'space-around',
   },
   boxData1: {
     backgroundColor: 'white',
@@ -186,24 +188,30 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
   },
-  boxData2:{
+  boxData2: {
     paddingVertical: 10,
     width: Dimensions.get('window').width / 3,
-    flexDirection: 'row', 
+    flexDirection: 'row',
   },
-  place:{
+  place: {
     paddingLeft: 5,
     paddingRight: 5,
     textAlign: 'center',
-    borderWidth: 0.8
+    borderWidth: 0.8,
   },
-  data2:{
+  data2: {
     textAlign: 'center',
     paddingLeft: 5,
   },
-  nameTitle:{
+  nameTitle: {
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
-  }
+  },
+  nameTitle1: {
+    textAlign: 'center',
+    marginVertical: 20,
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
 });

@@ -2,7 +2,6 @@ import {StyleSheet, Text, TextInput, View, TouchableOpacity, ScrollView, Alert, 
 import React, {useEffect, useState} from 'react';
 import axios from 'axios';
 import DatePicker from 'react-native-date-picker';
-import {ActivityIndicator, RadioButton} from 'react-native-paper';
 import moment from 'moment';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {Colors, Fonts, Images} from '@app/themes';
@@ -17,7 +16,6 @@ import {
 
 const NorthResultScreen = () => {
   const navigation = useNavigation();
-  const [checked, setChecked] = React.useState('first');
   const [isLoading, setIsLoading] = useState(true);
   const [data, setData] = useState([]);
   const [dataHead, setDataHead] = useState([]);
@@ -51,11 +49,10 @@ const NorthResultScreen = () => {
         result: data[item].join('     '),
       });
     }
-    // console.log(dataSource)
     return dataSource;
   };
   let dataLotData = handleData(data);
-  console.log(dataLotData);
+  //console.log(dataLotData);
   let dataHeadProcess = handleData(dataHead);
   let dataTailProcess = handleData(dataTail);
 
@@ -67,7 +64,9 @@ const NorthResultScreen = () => {
           navigation.goBack();
         }}
       />
-      <TouchableOpacity style={{backgroundColor: '#B9E6FF'}} onPress={() => setOpen(true)}>
+      <TouchableOpacity
+        style={{backgroundColor: '#fff', borderRadius: 20, width: 100, marginLeft: 160}}
+        onPress={() => setOpen(true)}>
         <Text style={styles.chooseDate}>{moment(date).format('YYYY-MM-DD')}</Text>
       </TouchableOpacity>
       <DatePicker
@@ -96,7 +95,7 @@ const NorthResultScreen = () => {
       </View>
       <View>
         <View style={styles.container2}>
-          <View style={{marginTop:20}}>
+          <View style={{marginTop: 20}}>
             <Text style={styles.title}>Đầu</Text>
             {dataHeadProcess.map(item => {
               return (
@@ -107,7 +106,7 @@ const NorthResultScreen = () => {
               );
             })}
           </View>
-          <View style={{marginTop:20}}>
+          <View style={{marginTop: 20}}>
             <Text style={styles.title}>Đuôi</Text>
             {dataTailProcess.map(item => {
               return (
@@ -132,10 +131,10 @@ const styles = StyleSheet.create({
   container1: {
     marginTop: 20,
   },
-  container2:{
-    marginTop: 10, 
-    flexDirection: 'row', 
-    justifyContent: 'space-around'
+  container2: {
+    marginTop: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
   boxData1: {
     backgroundColor: '#fff',
@@ -159,26 +158,25 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width / 4,
     textAlign: 'center',
   },
-  boxData2:{
+  boxData2: {
     flexDirection: 'row',
     paddingVertical: 10,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
-  place:{
+  place: {
     textAlign: 'center',
     paddingRight: 10,
     borderRightWidth: 1,
     borderLeftWidth: 1,
     paddingLeft: 10,
   },
-  data2:{
+  data2: {
     textAlign: 'center',
     paddingLeft: 20,
   },
-  title: 
-  {
+  title: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
-  }
+  },
 });

@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     width: 23,
     textAlign: 'center',
     borderColor: 'crimson',
+    backgroundColor: 'white'
   },
   date: {
     fontSize: 15,
